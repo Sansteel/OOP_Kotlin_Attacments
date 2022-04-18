@@ -8,7 +8,7 @@ import ru.netology.service.WallService
 
 fun main() {
     val myService = WallService()
-    val attService = AttService()
+    val attService = AttService(1)
 
     val original = Post(
         id = 1,

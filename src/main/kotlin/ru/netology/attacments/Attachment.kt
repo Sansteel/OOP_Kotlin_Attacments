@@ -6,7 +6,7 @@ abstract class Attachment(
     //val attType: String, //тип вложения
     val attTypeArr: ArrayList<String> = arrayListOf<String>("audio","photo"),
     val id: Int, //Идентификатор юзера
-    val owner_id: Int?, //Идентификатор владельца вложения //todo присвоить значению id из Post
+    var owner_id: Int, //Идентификатор владельца вложения //todo присвоить значению id из Post
 
 ) {
 
