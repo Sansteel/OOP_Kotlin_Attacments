@@ -2,12 +2,14 @@ package ru.netology.data
 
 import ru.netology.attacments.Attachment
 import ru.netology.service.AttService
+import java.text.DateFormat
+import java.util.*
 
 data class Post(
     val id: Int, //Идентификатор записи
     var text: String, //Текст записи
-    val date: Int, //Время публикации записи в формате unixtime
     val ownerId: Int, //Идентификатор владельца стены, на которой размещена запись
+    val date: Long = System.currentTimeMillis(), //Время публикации записи в формате unixtime
     val fromId: Int = ownerId, //Идентификатор автора записи (от чьего имени опубликована запись)
     val createdBy: Int = ownerId, //Идентификатор администратора, который опубликовал запись
     // (возвращается только для сообществ при запросе с ключом доступа администратора).
@@ -16,9 +18,9 @@ data class Post(
     val friendsOnly: Boolean = false, // 1, если запись была создана с опцией «Только для друзей»
     var comments: CommentsObj? = null, // нет комментов в начале
     //val copyright: CopyrightObj, //todo
-    val likes: LikesObj?, //todo
-    val reposts: RepostsObj?, //todo
-    val views: ViewsObj?, //todo
+    val likes: LikesObj? = null, //todo
+    val reposts: RepostsObj? =null, //todo
+    val views: ViewsObj? = null, //todo
     val postType: String = "post", //Тип записи, может принимать следующие значения: post, copy, reply, postpone, suggest
     val signerId: Int = ownerId, // Идентификатор автора, если запись была опубликована от имени сообщества и подписана пользователем
     var canPin: Boolean = true, //может ли текущий пользователь закрепить запись (1 — может).
@@ -29,10 +31,11 @@ data class Post(
     var isFavorite: Boolean = false, //true, если объект добавлен в закладки у текущего пользователя
     //    val donut: DonutObj, //todo
     val postponedID: Int = 0, //Идентификатор отложенной записи. Это поле возвращается тогда, когда запись стояла на таймере.
-    val original: Post?,
-    var attachermnts: AttService? = AttService(ownerId)
+    val original: Post? = null,
+    var attachermnts: AttService? = AttService(),
 
-)
+
+    )
 {
     //   constructor(id: Int, text: String, friendsOnly: Boolean) : this()
 }

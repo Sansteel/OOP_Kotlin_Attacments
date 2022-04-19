@@ -22,7 +22,7 @@ class WallService {
 
     fun print() {
         for ((index, post) in posts.withIndex()) {
-            println("Пост ${index + 1}: id=" + posts[index].id + " " + posts[index].date)
+            println("Пост ${index + 1}: id=" + posts[index].id + " Date unixtime: " + posts[index].date)
             println("text=" + posts[index].text)
             println("owner id=" + posts[index].ownerId)
             println("Комментов=" + posts[index].comments?.count)
