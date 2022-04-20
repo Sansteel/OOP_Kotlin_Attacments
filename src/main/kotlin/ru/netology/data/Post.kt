@@ -32,7 +32,7 @@ data class Post(
     //    val donut: DonutObj, //todo
     val postponedID: Int = 0, //Идентификатор отложенной записи. Это поле возвращается тогда, когда запись стояла на таймере.
     val original: Post? = null,
-    var attachermnts: AttService? = AttService(),
+    var attachermnts: AttService? = null, //AttService(ownerId),
 
 
     )

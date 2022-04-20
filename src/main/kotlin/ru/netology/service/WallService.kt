@@ -13,7 +13,10 @@ class WallService {
     fun update(newPost: Post): Boolean {
         for ((index, oldPost) in posts.withIndex()) {
             if (oldPost.id == newPost.id) {
-                posts[index] = newPost.copy(ownerId = oldPost.ownerId, date = oldPost.date)
+                posts[index] = newPost.copy(
+                    ownerId = oldPost.ownerId, date = oldPost.date,
+                    comments = oldPost.comments
+                )  //в ксобках пишем поля Post которые должны наследоваться
                 return true
             }
         }
@@ -25,11 +28,11 @@ class WallService {
             println("Пост ${index + 1}: id=" + posts[index].id + " Date unixtime: " + posts[index].date)
             println("text=" + posts[index].text)
             println("owner id=" + posts[index].ownerId)
-            println("Комментов=" + posts[index].comments?.count)
+            if (posts[index].comments?.count != null) {println("Комментов=" + posts[index].comments?.count)}
             if (posts[index].attachermnts != null) {
                 println("Вложения: " + posts[index].attachermnts!!.count + " шт")
                 posts[index].attachermnts!!.print() //некоторые сведения о вложениях
-            } else println("Вложений нет")
+            }
             println("\n")
         }
     }

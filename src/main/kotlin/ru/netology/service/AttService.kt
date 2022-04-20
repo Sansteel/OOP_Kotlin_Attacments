@@ -3,13 +3,13 @@ package ru.netology.service
 import ru.netology.attacments.Attachment
 
 class AttService(
-    //private var ownerId: Int //проблема с передачей поля из Post
+    private var ownerId: Int //передача поля из Post
 ) {
     var attachments = emptyArray<Attachment>() // пустой массив постов
     var count = 0 //счетчик вложений
 
-    fun add(att: Attachment, localId: Int): Attachment { //метод для создания либо Unit
-        att.owner_id = localId
+    fun add(att: Attachment): Attachment { //метод для добавления
+        att.owner_id = ownerId
         attachments += att //добавляем
         count++
         return attachments.last()
