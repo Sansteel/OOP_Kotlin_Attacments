@@ -52,11 +52,13 @@ fun main() {
 //    println("SYSTEM: Обновление поста с id=${originalUpd.id} = $resultat \n")
 //    myService.print()
 
-    val attService = AttService(originalPost.id) //запускаем сервис вложений на конкретный пост
+    val attService = AttService(originalPost.ownerId, originalPost.id) //запускаем сервис вложений на конкретный пост
 
-    val testAtt = Audio(1112233, 123, 333, null, null, 10)
-    val testAtt2 = Audio(0, 1, 2, "3", "4", 5)
-    val testAtt3 = Photo( 1, 2, 3,
+    val testAtt = Audio(1112233,
+        123333333, //игнорится тут это значение, берется из родителя
+        333, null, null, 10)
+    val testAtt2 = Audio(777888, 1, 2, "3", "4", 5)
+    val testAtt3 = Photo( 24444, 2, 3,
         "нет описания", 5, 6, 7)
 
     val att1 = attService.add(testAtt)

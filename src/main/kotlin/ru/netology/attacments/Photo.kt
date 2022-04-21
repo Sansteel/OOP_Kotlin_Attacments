@@ -8,6 +8,6 @@ class Photo(
     val date: Int, //Дата добавления в формате Unixtime
     val width: Int, //Ширина оригинала фотографии в пикселах
     val height: Int //Высота оригинала фотографии в пикселах.
-) : Attachment(arrayListOf("photo"), idP, ownerId) {
+) : Attachment("photo", idP, ownerId) {
 
 }
