@@ -32,9 +32,9 @@ fun main() {
 //    println("SYSTEM: Список постов \n")
 //    myService.print()
 
-    // добавляем коммент, todo пока в единственном экз
-    val commentToPost = CommentsObj(count = 1, canPost = false, comText = "очень интересный пост")
-    newPost.comments = commentToPost
+//    // добавляем коммент - соталось от предыдущей наработки
+//    val commentToPost = Comment(count = 1, canPost = false, comText = "очень интересный пост")
+//    newPost.comments = commentToPost
 
 //    println("SYSTEM: Список постов с комментами \n")
 //    myService.print()
