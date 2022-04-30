@@ -2,8 +2,6 @@ package ru.netology.data
 
 import ru.netology.attacments.Attachment
 import ru.netology.service.AttService
-import java.text.DateFormat
-import java.util.*
 
 data class Post(
     val id: Int, //Идентификатор записи
@@ -16,7 +14,7 @@ data class Post(
 //    val replyOwnerId: Int, // Идентификатор владельца записи, в ответ на которую была оставлена текущая
 //    val replyPostId: Int, //Идентификатор записи, в ответ на которую была оставлена текущая.
     val friendsOnly: Boolean = false, // 1, если запись была создана с опцией «Только для друзей»
-    var comments: CommentsObj? = null, // нет комментов в начале
+    var comments: Comment? = null, // нет комментов в начале
     //val copyright: CopyrightObj, //todo
     val likes: LikesObj? = null, //todo
     val reposts: RepostsObj? =null, //todo
