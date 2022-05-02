@@ -2,6 +2,8 @@ package ru.netology.service
 
 import ru.netology.data.*
 import ru.netology.exeptions.PostNotFoundException
+import java.lang.Exception
+import java.lang.NullPointerException
 
 class WallService {
     private var posts = emptyArray<Post>() // пустой массив из постов
@@ -30,7 +32,16 @@ class WallService {
             println("Пост ${index + 1}: id=" + posts[index].id + " Date unixtime: " + posts[index].date)
             println("text=" + posts[index].text)
             println("owner id=" + posts[index].ownerId)
-            //if (posts[index].comments?.count != null) {println("Комментов=" + posts[index].comments?.count)}
+            try {
+                if (comments.isNotEmpty()) {
+                    println("Комменты: " + posts[index].comments!!.size)
+                    println(posts[index].comments!![0].text)
+                }
+            } catch (e: PostNotFoundException) {
+                println("Пост не нейден")
+            } catch (e: NullPointerException) {
+                println(" тут комментов нету")
+            }
             if (posts[index].attachermnts != null) {
                 println("Вложения: " + posts[index].attachermnts!!.count + " шт")
                 posts[index].attachermnts!!.print() //некоторые сведения о вложениях
@@ -39,14 +50,26 @@ class WallService {
         }
     }
 
+    fun findById(id: Int): Post? {
+        for (post in posts) {
+            if (post.id == id) {
+                return post
+            }
+        }
+        return null
+    }
+
     fun createComment(
         comment: Comment,
-        postId: Int, //Идентификатор записи на стене
     ) {
         try {
-            for ((index, post) in posts.withIndex()) {
-                if (post.id == postId) comments += comment
+            val temp: Post? = findById(comment.postId)
+            if (temp?.id == comment.postId) {
+                comments += comment
+                temp.comments = comments
+                println("LOG: comment added to Post ID ${temp.id} sucsess \n")
             }
+
         } catch (e: PostNotFoundException) {
             println("Пост не нейден")
         }

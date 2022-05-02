@@ -29,6 +29,7 @@ fun main() {
     myService.add(newPost)
     myService.add(newPost3)
 
+/* добавляем коммент - соталось от предыдущей наработки
 //    println("SYSTEM: Список постов \n")
 //    myService.print()
 
@@ -38,6 +39,7 @@ fun main() {
 
 //    println("SYSTEM: Список постов с комментами \n")
 //    myService.print()
+*/
 
     //обновляем первый пост новым содержимым
     val originalUpd = Post(
@@ -48,7 +50,6 @@ fun main() {
     )
 
     val resultat = myService.update(originalUpd)
-
 //    println("SYSTEM: Обновление поста с id=${originalUpd.id} = $resultat \n")
 //    myService.print()
 
@@ -65,7 +66,6 @@ fun main() {
     val att2 = attService.add(testAtt2)
     val att3 = attService.add(testAtt3)
 
-
     val attAddPost = Post(
         3, // номер должен совпадать с имеющимся id иначе false
         "вложения есть)",
@@ -80,7 +80,15 @@ fun main() {
 
     myService.update(attAddPost)
 
-    println("SYSTEM: Добавление вложения с id=${attAddPost.id} = $resultat \n")
-    println("SYSTEM: ИТОГОВЫЙ ВИД с вложениями \n")
+//    println("SYSTEM: Добавление вложения с id=${attAddPost.id} = $resultat \n")
+//    println("SYSTEM: ВИД с вложениями \n")
+//    myService.print()
+
+    val comment1 = Comment(
+        1,100001, 2000, 1111111, "это первый коммнтарий в сервисе комментов"
+    )
+    println("-------------------------------Внедряем комменты---------------------------")
+    myService.createComment(comment1)
     myService.print()
+
 }

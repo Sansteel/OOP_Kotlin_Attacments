@@ -13,7 +13,7 @@ data class Post(
 //    val replyOwnerId: Int, // Идентификатор владельца записи, в ответ на которую была оставлена текущая
 //    val replyPostId: Int, //Идентификатор записи, в ответ на которую была оставлена текущая.
     val friendsOnly: Boolean = false, // 1, если запись была создана с опцией «Только для друзей»
-    var comments: Comment? = null, // нет комментов в начале
+    var comments: Array<Comment>? = null, // нет комментов в начале
     //val copyright: CopyrightObj, //todo
     val likes: LikesObj? = null, //todo
     val reposts: RepostsObj? =null, //todo
@@ -30,7 +30,6 @@ data class Post(
     val postponedID: Int = 0, //Идентификатор отложенной записи. Это поле возвращается тогда, когда запись стояла на таймере.
     val original: Post? = null,
     var attachermnts: AttService? = null, //AttService(ownerId),
-
 
     )
 {
