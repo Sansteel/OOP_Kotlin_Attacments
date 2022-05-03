@@ -2,11 +2,10 @@ package ru.netology.service
 
 import ru.netology.data.*
 import ru.netology.exeptions.PostNotFoundException
-import java.lang.Exception
 import java.lang.NullPointerException
 
 class WallService {
-    private var posts = emptyArray<Post>() // пустой массив из постов
+    var posts = emptyArray<Post>() // пустой массив из постов
     private var comments = emptyArray<Comment>()
 
     fun add(post: Post): Post { //метод для создания записи должен выглядеть вот так (на вх и вых Post)
@@ -33,14 +32,14 @@ class WallService {
             println("text=" + posts[index].text)
             println("owner id=" + posts[index].ownerId)
             try {
-                if (comments.isNotEmpty()) {
-                    println("Комменты: " + posts[index].comments!!.size)
-                    println(posts[index].comments!![0].text)
-                }
+                if (posts[index].comments!!.isNotEmpty()) {
+                        println("Комменты: " + posts[index].comments!!.size)
+                        println(posts[index].comments!![0].text) //todo в иделае конечно надо зациклить
+                    }
             } catch (e: PostNotFoundException) {
-                println("Пост не нейден")
+                println("Пост не найден. Исключение из функции print")
             } catch (e: NullPointerException) {
-                println(" тут комментов нету")
+                println("тут комментов нету")
             }
             if (posts[index].attachermnts != null) {
                 println("Вложения: " + posts[index].attachermnts!!.count + " шт")
@@ -50,28 +49,26 @@ class WallService {
         }
     }
 
-    fun findById(id: Int): Post? {
+    fun findById(id: Int): Post {
         for (post in posts) {
             if (post.id == id) {
                 return post
             }
         }
-        return null
+        throw PostNotFoundException()
     }
 
-    fun createComment(
-        comment: Comment,
-    ) {
+    fun createComment(comment: Comment) {
         try {
-            val temp: Post? = findById(comment.postId)
-            if (temp?.id == comment.postId) {
+            val temp: Post = findById(comment.postId)!!
+            if (temp.id == comment.postId) {
                 comments += comment
                 temp.comments = comments
-                println("LOG: comment added to Post ID ${temp.id} sucsess \n")
+                println("LOG: comment added to Post ID ${temp.id} success \n")
             }
 
         } catch (e: PostNotFoundException) {
-            println("Пост не нейден")
+            println("Пост не наейден. Исключение из функции createComment \n")
         }
     }
 }

@@ -7,6 +7,7 @@ import ru.netology.service.AttService
 import ru.netology.service.WallService
 
 fun main() {
+
     val myService = WallService() //запуск сервиса работы с Post
 
     val originalPost = Post(id = 1, "это тестовый пост", 123)
@@ -85,7 +86,7 @@ fun main() {
 //    myService.print()
 
     val comment1 = Comment(
-        1,100001, 2000, 1111111, "это первый коммнтарий в сервисе комментов"
+        222,100001, 2000, 1111111, "это первый коммнтарий в сервисе комментов"
     )
     println("-------------------------------Внедряем комменты---------------------------")
     myService.createComment(comment1)

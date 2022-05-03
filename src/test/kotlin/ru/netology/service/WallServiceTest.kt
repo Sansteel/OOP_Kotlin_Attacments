@@ -4,7 +4,7 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import ru.netology.data.Post
-import java.util.*
+import ru.netology.exeptions.PostNotFoundException
 
 class WallServiceTest {
 
@@ -120,4 +120,48 @@ class WallServiceTest {
         assertFalse(actualResultUpd)
     }
 
+    //new test for exception task
+    @Test
+    fun findByIdTrue() {
+        val service = WallService()
+
+        // arrange
+        val testPost1 = Post(
+            id = 1,
+            "тут у нас findById должен сработать",
+            123,
+            33333,
+        )
+        // act
+        service.add(testPost1)
+        service.print()
+
+        val expextedResult = testPost1
+        val actualResult = service.findById(1)
+
+        // assert
+        assertEquals(expextedResult, actualResult)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun findByIdExcept() {
+        val service = WallService()
+
+        // arrange
+        val testPost1 = Post(
+            id = 1,
+            "тестируем искл функции findById",
+            123,
+            33333,
+        )
+        // act
+        service.add(testPost1)
+        service.print()
+
+        service.findById(22) //чекаем наш искл
+    }
+
+    @Test
+    fun createComment() {
+    }
 }
