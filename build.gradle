@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.6.21'
+    id 'jacoco' // плагин для покрытия тестами, результат см в пакете build/reports...
 }
 
 group 'ru.netology'

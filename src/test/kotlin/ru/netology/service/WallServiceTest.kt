@@ -3,6 +3,8 @@ package ru.netology.service
 import org.junit.Test
 
 import org.junit.Assert.*
+import org.junit.Ignore
+import ru.netology.data.Comment
 import ru.netology.data.Post
 import ru.netology.exeptions.PostNotFoundException
 
@@ -158,10 +160,59 @@ class WallServiceTest {
         service.add(testPost1)
         service.print()
 
+        //Assert
         service.findById(22) //чекаем наш искл
     }
 
     @Test
-    fun createComment() {
+    fun createCommentTrue() {
+        val service = WallService()
+
+        // arrange
+        val testPost1 = Post(
+            id = 1,
+            "тут у нас createComment должен сработать",
+            123,
+            33333,
+        )
+        // act
+        service.add(testPost1)
+
+        val comment1 = Comment(
+            1,100001, 2000, 1111111, "это первый коммнтарий в сервисе комментов"
+        )
+        service.createComment(comment1)
+
+        service.print()
+
+        val expextedResult = testPost1.comments?.size
+        val actualResult = 1 //чекаем факт добавления коммента к посту
+
+        // assert
+        assertEquals(expextedResult, actualResult)
     }
+
+    @Ignore("WHY???")
+    @Test(expected = PostNotFoundException::class)
+    fun createCommentExcep() {
+        val service = WallService()
+
+        // arrange
+        val testPost1 = Post(
+            id = 1,
+            "тут у нас createComment тестируется",
+            123,
+            33333,
+        )
+        // act
+        service.add(testPost1)
+
+        val comment1 = Comment(
+            2, 100001, 2000, 1111111, "это первый коммнтарий в сервисе комментов"
+        )
+
+        // assert
+        service.createComment(comment1) //ловим исключение
+    }
+
 }
