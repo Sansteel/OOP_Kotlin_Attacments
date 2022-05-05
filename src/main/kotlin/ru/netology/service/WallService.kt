@@ -32,12 +32,10 @@ class WallService {
             println("text=" + posts[index].text)
             println("owner id=" + posts[index].ownerId)
             try {
-                if (posts[index].comments!!.isNotEmpty()) {
+                //if (posts[index].comments!!.isNotEmpty()) { //это дублирвоание, чекается через try
                         println("Комменты: " + posts[index].comments!!.size)
                         println(posts[index].comments!![0].text) //todo в иделае конечно надо зациклить
-                    }
-            } catch (e: PostNotFoundException) {
-                println("Пост не найден. Исключение из функции print")
+                  //  }
             } catch (e: NullPointerException) {
                 println("тут комментов нету")
             }
@@ -55,20 +53,14 @@ class WallService {
                 return post
             }
         }
-        throw PostNotFoundException()
+        throw PostNotFoundException() //прерывается прога
     }
 
     fun createComment(comment: Comment) {
-        try {
             val temp: Post = findById(comment.postId)!!
-            if (temp.id == comment.postId) {
+            //if (temp.id == comment.postId) { //это условие ignored т.к. try уехал в main
                 comments += comment
                 temp.comments = comments
                 println("LOG: comment added to Post ID ${temp.id} success \n")
-            }
-
-        } catch (e: PostNotFoundException) {
-            println("Пост не наейден. Исключение из функции createComment \n")
-        }
     }
 }

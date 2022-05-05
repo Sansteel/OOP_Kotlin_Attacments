@@ -192,7 +192,7 @@ class WallServiceTest {
         assertEquals(expextedResult, actualResult)
     }
 
-    @Ignore("WHY???")
+    //@Ignore("WHY???")
     @Test(expected = PostNotFoundException::class)
     fun createCommentExcep() {
         val service = WallService()

@@ -3,6 +3,7 @@ package ru.netology
 import ru.netology.attacments.Audio
 import ru.netology.attacments.Photo
 import ru.netology.data.*
+import ru.netology.exeptions.PostNotFoundException
 import ru.netology.service.AttService
 import ru.netology.service.WallService
 
@@ -89,7 +90,11 @@ fun main() {
         2,100001, 2000, 1111111, "это первый коммнтарий в сервисе комментов"
     )
     println("-------------------------------Внедряем комменты---------------------------")
-    myService.createComment(comment1)
+    try { //перенес сюда для ловли exception в createComment при тестах
+        myService.createComment(comment1)
+    } catch (e: PostNotFoundException) {
+        println("Пост не наейден. Исключение из функции createComment \n")
+    }
     myService.print()
 
 }
